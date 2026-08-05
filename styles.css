@@ -14,3 +14,23 @@ h1{
 
 }
 
+.contenedor-lista{
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: #f0f4f0;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+
+}
+
+.mensaje-carga{
+
+    text-align: center;
+    color: #f0f4f0;
+    font-size: 1.2rem;
+    padding: 40px;
+}
+
