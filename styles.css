@@ -1,0 +1,43 @@
+body{
+font-family: Arial, Helvetica, sans-serif;
+background-color: #f0f4f0 ;
+margin:0;
+padding: 20px;    
+}
+
+h1{
+
+    text-align: center;
+    color:antiquewhite;
+    margin-bottom:30px;
+    font-size: 2.5rem;
+
+}
+
+.contenedor-lista{
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: #f0f4f0;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+
+}
+
+.mensaje-carga{
+
+    text-align: center;
+    color: #f0f4f0;
+    font-size: 1.2rem;
+    padding: 40px;
+}
+.targeta-feriado:hoover{
+    transform: scale(1.02);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+}
+
+
+
