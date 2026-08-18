@@ -1,43 +1,201 @@
-body{
-font-family: Arial, Helvetica, sans-serif;
-background-color: #f0f4f0 ;
-margin:0;
-padding: 20px;    
+/* =============================================
+   Estilos generales
+   ============================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-h1{
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #e8eef5 0%, #f5f7fa 50%, #dce4ef 100%);
+    min-height: 100vh;
+    color: #2c3e50;
+    line-height: 1.6;
+}
 
+/* =============================================
+   Encabezado
+   ============================================= */
+.encabezado {
     text-align: center;
-    color:antiquewhite;
-    margin-bottom:30px;
-    font-size: 2.5rem;
-
+    padding: 2.5rem 1.5rem 1.5rem;
+    background: linear-gradient(135deg, #1e3a5f 0%, #2563a8 100%);
+    color: #ffffff;
+    box-shadow: 0 4px 20px rgba(30, 58, 95, 0.3);
 }
 
-.contenedor-lista{
-    max-width: 900px;
+.encabezado h1 {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.5px;
+}
+
+.subtitulo {
+    font-size: 1rem;
+    opacity: 0.9;
+    font-weight: 300;
+}
+
+/* =============================================
+   Contenedor principal
+   ============================================= */
+.contenedor-principal {
+    max-width: 1200px;
     margin: 0 auto;
-    background-color: #f0f4f0;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 2rem 1.5rem;
+}
+
+/* =============================================
+   Grid de feriados (1 / 2 / 3 columnas)
+   ============================================= */
+.lista-feriados {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 15px;
-
+    gap: 1.25rem;
 }
 
-.mensaje-carga{
+/* Tablet: 2 columnas */
+@media (min-width: 600px) {
+    .lista-feriados {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
 
+/* Escritorio: 3 columnas */
+@media (min-width: 1024px) {
+    .lista-feriados {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* =============================================
+   Tarjetas de feriado
+   ============================================= */
+.tarjeta-feriado {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 1.5rem;
+    border-left: 5px solid #2563a8;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    animation: aparecer 0.4s ease forwards;
+    opacity: 0;
+}
+
+/* Efecto hover en las tarjetas */
+.tarjeta-feriado:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(37, 99, 168, 0.2);
+}
+
+/* Animación de entrada escalonada */
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fecha-feriado {
+    display: inline-block;
+    background: #e8eef5;
+    color: #1e3a5f;
+    font-weight: 700;
+    font-size: 0.9rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: 20px;
+    margin-bottom: 0.75rem;
+}
+
+.nombre-espanol {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #1e3a5f;
+    margin-bottom: 0.5rem;
+}
+
+.nombre-ingles {
+    font-size: 0.95rem;
+    color: #64748b;
+    margin-bottom: 0.75rem;
+}
+
+.tipo-feriado {
+    display: inline-block;
+    background: #2563a8;
+    color: #ffffff;
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 0.25rem 0.65rem;
+    border-radius: 6px;
+    text-transform: capitalize;
+}
+
+/* Variaciones de color en el borde izquierdo */
+.tarjeta-feriado:nth-child(3n + 1) {
+    border-left-color: #2563a8;
+}
+
+.tarjeta-feriado:nth-child(3n + 2) {
+    border-left-color: #3b82c4;
+}
+
+.tarjeta-feriado:nth-child(3n + 3) {
+    border-left-color: #64748b;
+}
+
+/* =============================================
+   Mensajes de estado (carga y error)
+   ============================================= */
+.mensaje-carga,
+.mensaje-error {
+    grid-column: 1 / -1;
     text-align: center;
-    color: #f0f4f0;
-    font-size: 1.2rem;
-    padding: 40px;
-}
-.targeta-feriado:hoover{
-    transform: scale(1.02);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-
+    padding: 3rem 2rem;
+    border-radius: 12px;
+    font-size: 1.1rem;
 }
 
+.mensaje-carga {
+    background: #ffffff;
+    color: #2563a8;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    animation: pulso 1.5s ease-in-out infinite;
+}
 
+.mensaje-error {
+    background: #fef2f2;
+    color: #991b1b;
+    border: 1px solid #fecaca;
+}
 
+@keyframes pulso {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+}
+
+/* =============================================
+   Pie de página
+   ============================================= */
+.pie-pagina {
+    text-align: center;
+    padding: 1.5rem;
+    color: #64748b;
+    font-size: 0.85rem;
+}
+
+.pie-pagina a {
+    color: #2563a8;
+    text-decoration: none;
+}
+
+.pie-pagina a:hover {
+    text-decoration: underline;
+}
