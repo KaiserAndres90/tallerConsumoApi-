@@ -33,3 +33,32 @@ body {
     margin: 0 auto;
     padding: 2rem 1.5rem;
 }
+.lista-feriados {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+}
+@media (min-width: 600px) {
+    .lista-feriados {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (min-width: 1024px) {
+    .lista-feriados {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+.tarjeta-feriado {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 1.5rem;
+    border-left: 5px solid #2563a8;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    animation: aparecer 0.4s ease forwards;
+    opacity: 0;
+}
+.tarjeta-feriado:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(37, 99, 168, 0.2);
+}
