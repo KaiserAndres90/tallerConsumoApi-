@@ -1,157 +1,235 @@
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #e8eef5 0%, #f5f7fa 50%, #dce4ef 100%);
+    font-family: 'Poppins', 'Segoe UI', sans-serif;
     min-height: 100vh;
-    color: #2c3e50;
+    background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e, #1a1a2e);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    color: #ffffff;
     line-height: 1.6;
 }
+
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+
 .encabezado {
     text-align: center;
-    padding: 2.5rem 1.5rem 1.5rem;
-    background: linear-gradient(135deg, #1e3a5f 0%, #2563a8 100%);
-    color: #ffffff;
-    box-shadow: 0 4px 20px rgba(30, 58, 95, 0.3);
+    padding: 3rem 1.5rem 2rem;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
+
 .encabezado h1 {
-    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-size: clamp(2rem, 5vw, 3.5rem);
     font-weight: 700;
-    margin-bottom: 0.5rem;
-    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 50%, #4facfe 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -1px;
+    text-shadow: none;
 }
+
 .subtitulo {
-    font-size: 1rem;
-    opacity: 0.9;
+    font-size: 1.1rem;
+    opacity: 0.7;
     font-weight: 300;
+    letter-spacing: 2px;
+    color: #c8d6e5;
 }
+
+
 .contenedor-principal {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 2rem 1.5rem;
+    padding: 2.5rem 1.5rem;
 }
+
+
 .lista-feriados {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 1.25rem;
+    gap: 1.5rem;
 }
+
 @media (min-width: 600px) {
     .lista-feriados {
         grid-template-columns: repeat(2, 1fr);
     }
 }
+
 @media (min-width: 1024px) {
     .lista-feriados {
         grid-template-columns: repeat(3, 1fr);
     }
 }
+
+
 .tarjeta-feriado {
-    background: #ffffff;
-    border-radius: 12px;
-    padding: 1.5rem;
-    border-left: 5px solid #2563a8;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-    animation: aparecer 0.4s ease forwards;
+    position: relative;
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 20px;
+    padding: 1.8rem 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    animation: aparecer 0.6s ease forwards;
     opacity: 0;
+    overflow: hidden;
 }
+
+
+.tarjeta-feriado::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #f093fb, #4facfe, transparent);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.tarjeta-feriado:hover::before {
+    opacity: 1;
+}
+
 .tarjeta-feriado:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(37, 99, 168, 0.2);
+    transform: translateY(-8px) scale(1.01);
+    box-shadow: 0 16px 48px rgba(79, 172, 254, 0.2);
+    background: rgba(255, 255, 255, 0.10);
+    border-color: rgba(255, 255, 255, 0.15);
 }
+
 @keyframes aparecer {
     from {
         opacity: 0;
-        transform: translateY(16px);
+        transform: translateY(30px) scale(0.96);
     }
     to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(0) scale(1);
     }
 }
-.fecha-feriado {
-    display: inline-block;
-    background: #e8eef5;
-    color: #1e3a5f;
-    font-weight: 700;
-    font-size: 0.9rem;
-    padding: 0.35rem 0.75rem;
-    border-radius: 20px;
-    margin-bottom: 0.75rem;
-}
-.nombre-espanol {
-    font-size: 1.15rem;
-    font-weight: 600;
-    color: #1e3a5f;
-    margin-bottom: 0.5rem;
-}
-.nombre-ingles {
-    font-size: 0.95rem;
-    color: #64748b;
-    margin-bottom: 0.75rem;
-}
-.tipo-feriado {
-    display: inline-block;
-    background: #2563a8;
-    color: #ffffff;
-    font-size: 0.8rem;
-    font-weight: 500;
-    padding: 0.25rem 0.65rem;
-    border-radius: 6px;
-    text-transform: capitalize;
-}
+
+
 .tarjeta-feriado:nth-child(3n + 1) {
-    border-left-color: #2563a8;
+    border-left: 4px solid #f093fb;
 }
 
 .tarjeta-feriado:nth-child(3n + 2) {
-    border-left-color: #3b82c4;
+    border-left: 4px solid #4facfe;
 }
 
 .tarjeta-feriado:nth-child(3n + 3) {
-    border-left-color: #64748b;
+    border-left: 4px solid #f5576c;
 }
+
+
+.fecha-feriado {
+    display: inline-block;
+    background: rgba(79, 172, 254, 0.15);
+    color: #4facfe;
+    font-weight: 600;
+    font-size: 0.85rem;
+    padding: 0.3rem 0.9rem;
+    border-radius: 30px;
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.5px;
+    border: 1px solid rgba(79, 172, 254, 0.15);
+}
+
+.nombre-espanol {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 0.3rem;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.nombre-ingles {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 0.75rem;
+    font-weight: 300;
+}
+
+.tipo-feriado {
+    display: inline-block;
+    background: linear-gradient(135deg, rgba(240, 147, 251, 0.2), rgba(79, 172, 254, 0.2));
+    color: #c8d6e5;
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.2rem 0.8rem;
+    border-radius: 30px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+
 .mensaje-carga,
 .mensaje-error {
     grid-column: 1 / -1;
     text-align: center;
     padding: 3rem 2rem;
-    border-radius: 12px;
+    border-radius: 20px;
     font-size: 1.1rem;
 }
 
 .mensaje-carga {
-    background: #ffffff;
-    color: #2563a8;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-    animation: pulso 1.5s ease-in-out infinite;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(8px);
+    color: #4facfe;
+    border: 1px solid rgba(79, 172, 254, 0.15);
+    animation: pulso 1.8s ease-in-out infinite;
 }
 
 .mensaje-error {
-    background: #fef2f2;
-    color: #991b1b;
-    border: 1px solid #fecaca;
+    background: rgba(245, 87, 108, 0.10);
+    color: #f5576c;
+    border: 1px solid rgba(245, 87, 108, 0.20);
 }
 
 @keyframes pulso {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.6; }
+    0%, 100% { opacity: 0.6; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.02); }
 }
+
+
 .pie-pagina {
     text-align: center;
-    padding: 1.5rem;
-    color: #64748b;
+    padding: 2rem 1.5rem;
+    color: rgba(255, 255, 255, 0.3);
     font-size: 0.85rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    margin-top: 1rem;
 }
 
 .pie-pagina a {
-    color: #2563a8;
+    color: #4facfe;
     text-decoration: none;
+    transition: color 0.3s ease;
+    font-weight: 500;
 }
 
 .pie-pagina a:hover {
-    text-decoration: underline;
+    color: #f093fb;
+    text-decoration: none;
 }
