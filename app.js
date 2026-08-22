@@ -19,18 +19,6 @@ function mostrarCargando() {
 }
 
 /**
- * @param {string} mensaje
- */
-function mostrarError(mensaje) {
-    if (!contenedorFeriados) return;
-
-    contenedorFeriados.innerHTML = `
-        <div class="mensaje-error">
-            ${mensaje}
-        </div>
-    `;
-}
-/**
  * @param {string} 
  * @returns {string} 
  */
@@ -69,11 +57,6 @@ function crearTarjetaFeriado(feriado, indice) {
  * @param {Array} 
  */
 function renderizarFeriados(feriados) {
-    if (!feriados || feriados.length === 0) {
-        mostrarError('No se encontraron feriados para Colombia en 2026.');
-        return;
-    }
-
     const feriadosOrdenados = [...feriados].sort(
         (a, b) => new Date(a.date) - new Date(b.date)
     );
@@ -86,42 +69,13 @@ function renderizarFeriados(feriados) {
 async function obtenerFeriados() {
     mostrarCargando();
 
-    try {
-        const respuesta = await fetch(API_URL);
-
-        if (!respuesta.ok) {
-            throw new Error(`Error del servidor (código ${respuesta.status}). La API no está disponible.`);
-        }
-
-        const datos = await respuesta.json();
-        renderizarFeriados(datos);
-    } catch (error) {
-        const esArchivoLocal = window.location.protocol === 'file:';
-        const esErrorRed = error instanceof TypeError;
-
-        if (esArchivoLocal && esErrorRed) {
-            mostrarError(
-                'No se puede conectar a la API abriendo el archivo directamente. ' +
-                'Usa un servidor local: en la terminal ejecuta "python -m http.server 8080" ' +
-                'y abre http://localhost:8080 en el navegador.'
-            );
-        } else if (esErrorRed) {
-            mostrarError('Sin conexión a internet. Verifica tu red e intenta de nuevo.');
-        } else {
-            mostrarError(error.message || 'Ocurrió un error inesperado al cargar los feriados.');
-        }
-
-        console.error('Error al obtener feriados:', error);
-    }
+    const respuesta = await fetch(API_URL);
+    const datos = await respuesta.json();
+    renderizarFeriados(datos);
 }
 
 function iniciarApp() {
     contenedorFeriados = obtenerContenedor();
-
-    if (!contenedorFeriados) {
-        console.error('No se encontró el elemento #lista-feriados en el HTML.');
-        return;
-    }
 
     obtenerFeriados();
 }

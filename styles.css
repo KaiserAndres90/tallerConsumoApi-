@@ -184,8 +184,7 @@ body {
 }
 
 
-.mensaje-carga,
-.mensaje-error {
+.mensaje-carga {
     grid-column: 1 / -1;
     text-align: center;
     padding: 3rem 2rem;
@@ -199,12 +198,6 @@ body {
     color: #4facfe;
     border: 1px solid rgba(79, 172, 254, 0.15);
     animation: pulso 1.8s ease-in-out infinite;
-}
-
-.mensaje-error {
-    background: rgba(245, 87, 108, 0.10);
-    color: #f5576c;
-    border: 1px solid rgba(245, 87, 108, 0.20);
 }
 
 @keyframes pulso {
